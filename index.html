@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html lang="ru">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Образ свободы — интерактивная история</title>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">"><title>Образ свободы — интерактивная история</title>
 
 <style>
 :root{--bg:#050707;--paper:#d7d3c8;--muted:#8f9997;--ice:#a8b8b8;--line:rgba(210,225,223,.16);--warm:#b89a70}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--paper);font-family:Georgia,'Times New Roman',serif;overflow-x:hidden;cursor:default}body:before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.11;background-image:repeating-radial-gradient(circle at 20% 30%,rgba(255,255,255,.18) 0 1px,transparent 1px 4px);mix-blend-mode:soft-light}.progress{position:fixed;top:0;left:0;height:2px;background:#aebdbc;width:0;z-index:100;box-shadow:0 0 12px #aebdbc}.soundless{position:fixed;right:22px;bottom:20px;z-index:80;font:9px Arial;letter-spacing:.22em;text-transform:uppercase;color:#7e8987}.eyebrow{font:10px Arial,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#9ba7a5}.hero{height:100svh;min-height:680px;position:relative;overflow:hidden;background:#050707}.heroBg{position:absolute;inset:-5%;background:url('images/ГГ.JPG') center/cover;transform:scale(1.08);filter:saturate(.65) contrast(1.08) brightness(.7)}.heroShade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,4,4,.18),rgba(2,4,4,.78)),linear-gradient(0deg,#050707 0,transparent 48%)}.heroText{position:absolute;z-index:3;left:7vw;bottom:9vh;max-width:900px}.hero h1{font-size:clamp(62px,11vw,165px);font-weight:400;line-height:.76;letter-spacing:-.055em;margin:.14em 0 .22em}.hero p{font-size:clamp(17px,1.8vw,25px);line-height:1.55;max-width:650px;color:#b8bbb4}.scrollCue{margin-top:28px;cursor:pointer;display:inline-flex;align-items:center;font:9px Arial;letter-spacing:.3em;text-transform:uppercase;color:#8b9694}.scrollCue{border:0;background:none;padding:0;color:#8b9694}.scrollCue i{display:inline-block;width:42px;height:1px;background:#8b9694;vertical-align:middle;margin-right:12px;animation:pulse 1.8s infinite}@keyframes pulse{50%{width:70px;opacity:.4}}
@@ -542,6 +542,37 @@ linear-gradient(180deg,rgba(3,4,4,.15),#050606 93%),url('images/house.JPG') cent
   letter-spacing: .34em;
 }
 
+@media(max-width:700px){
+
+  /* блок "Близость тоже может быть клеткой" */
+  .y03-filmStrip{
+    display:block !important;
+    width:86vw !important;
+    margin:0 auto !important;
+    padding:0 !important;
+    overflow:visible !important;
+    scroll-snap-type:none !important;
+  }
+
+  .y03-filmShot,
+  .y03-filmShot:nth-child(n){
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    margin:0 0 12px !important;
+    aspect-ratio:auto !important;
+  }
+
+  .y03-filmShot img,
+  .y03-filmShot:nth-child(n) img{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    object-fit:contain !important;
+  }
+}
 </style>
 
 </head>
@@ -962,7 +993,15 @@ linear-gradient(180deg,rgba(3,4,4,.15),#050606 93%),url('images/house.JPG') cent
 <script>
 const prog=document.querySelector('.progress'),heroBg=document.querySelector('.heroBg');addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;prog.style.width=(scrollY/max*100)+'%';heroBg.style.transform=`scale(1.08) translateY(${Math.min(scrollY*.06,40)}px)`},{passive:true});
 const corridor=document.querySelector('.corridor'),frames=[...document.querySelectorAll('.frame')],dots=[...document.querySelectorAll('.sceneDots i')],title=document.querySelector('#sceneTitle'),desc=document.querySelector('#sceneText');const scenes=[['Она услышала плач','Зимняя пурга за окном нарочно подыгрывала тому, кто плакал в заброшенном туалете, утаивая столь интересное событие.'],['Ещё несколько шагов','Она могла развернуться. Вместо этого пошла на звук дальше.'],['Она всё-таки вошла','Гермиона сделала ещё один шажок и выглянула из‑за дверного проёма. Блёклый свет луны бросал изогнутые тени от раковин и обрамлял скрючившуюся на полу фигуру.'],['Всхлипы прекратились','Она видела, как в его красных глазах одна эмоция сменялась другой. Сначала там был страх, затем гнев, а потом стыд.'],['«Всё будет хорошо, Драко...»','Лоб Драко в конце концов прижался к её руке.Обещание утешения сне потерять её превратит спасение в клетку.']];
-function corridorScroll(){const r=corridor.getBoundingClientRect(),p=Math.max(0,Math.min(1,-r.top/(r.height-innerHeight))),i=Math.min(3,Math.floor(p*5));frames.forEach((f,n)=>f.classList.toggle('active',n===i));dots.forEach((d,n)=>d.classList.toggle('on',n===i));title.textContent=scenes[i][0];desc.textContent=scenes[i][1]}addEventListener('scroll',corridorScroll,{passive:true});corridorScroll();
+let stableViewportHeight = window.innerHeight;
+
+window.addEventListener('orientationchange', () => {
+  setTimeout(() => {
+    stableViewportHeight = window.innerHeight;
+  }, 300);
+});
+
+function corridorScroll(){const r=corridor.getBoundingClientRect(),p=Math.max(0,Math.min(1,-r.top/(r.height-stableViewportHeight))),i=Math.min(3,Math.floor(p*5));frames.forEach((f,n)=>f.classList.toggle('active',n===i));dots.forEach((d,n)=>d.classList.toggle('on',n===i));title.textContent=scenes[i][0];desc.textContent=scenes[i][1]}addEventListener('scroll',corridorScroll,{passive:true});corridorScroll();
 document.querySelectorAll('.person').forEach(p=>{const toggle=()=>p.classList.toggle('open');p.addEventListener('click',toggle);p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')toggle()})});
 const info=document.querySelector('.mapInfo');
 // Move the location card outside the shaped map so no ancestor can clip it.
