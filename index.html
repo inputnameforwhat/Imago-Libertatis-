@@ -544,33 +544,51 @@ linear-gradient(180deg,rgba(3,4,4,.15),#050606 93%),url('images/house.JPG') cent
 
 @media(max-width:700px){
 
-  /* блок "Близость тоже может быть клеткой" */
+  /* Близость тоже может быть клеткой —
+     стабильная горизонтальная лента */
+
+  .y03-filmFragments{
+    overflow:hidden;
+  }
+
   .y03-filmStrip{
-    display:block !important;
-    width:86vw !important;
-    margin:0 auto !important;
+    display:flex !important;
+    width:100% !important;
+    margin:0 !important;
     padding:0 !important;
-    overflow:visible !important;
+    gap:0 !important;
+
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+
     scroll-snap-type:none !important;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-x pan-y;
   }
 
   .y03-filmShot,
   .y03-filmShot:nth-child(n){
-    display:block !important;
-    width:100% !important;
-    height:auto !important;
-    min-height:0 !important;
-    max-height:none !important;
-    margin:0 0 12px !important;
+    flex:0 0 82vw !important;
+    width:82vw !important;
+
+    /* ВАЖНО: высота заранее известна браузеру */
+    height:52svh !important;
+    min-height:420px !important;
+    max-height:560px !important;
+
+    margin:0 !important;
+    border:0 !important;
     aspect-ratio:auto !important;
+
+    overflow:hidden !important;
   }
 
   .y03-filmShot img,
   .y03-filmShot:nth-child(n) img{
     display:block !important;
     width:100% !important;
-    height:auto !important;
-    object-fit:contain !important;
+    height:100% !important;
+    object-fit:cover !important;
   }
 }
 
@@ -594,6 +612,9 @@ video{
     gap:0 !important;
     padding-left:0 !important;
     padding-right:0 !important;
+    scroll-snap-type:none !important;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
   }
 
   .shot{
@@ -637,6 +658,13 @@ video{
   }
 }
 
+  @media(max-width:700px){
+  html,
+  body{
+    scroll-behavior:auto !important;
+    overscroll-behavior-y:none;
+  }
+}
 </style>
 
 </head>
