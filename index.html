@@ -1,0 +1,1142 @@
+<!doctype html>
+
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Образ свободы — интерактивная история</title>
+
+<style>
+:root{--bg:#050707;--paper:#d7d3c8;--muted:#8f9997;--ice:#a8b8b8;--line:rgba(210,225,223,.16);--warm:#b89a70}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--paper);font-family:Georgia,'Times New Roman',serif;overflow-x:hidden;cursor:default}body:before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.11;background-image:repeating-radial-gradient(circle at 20% 30%,rgba(255,255,255,.18) 0 1px,transparent 1px 4px);mix-blend-mode:soft-light}.progress{position:fixed;top:0;left:0;height:2px;background:#aebdbc;width:0;z-index:100;box-shadow:0 0 12px #aebdbc}.soundless{position:fixed;right:22px;bottom:20px;z-index:80;font:9px Arial;letter-spacing:.22em;text-transform:uppercase;color:#7e8987}.eyebrow{font:10px Arial,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#9ba7a5}.hero{height:100svh;min-height:680px;position:relative;overflow:hidden;background:#050707}.heroBg{position:absolute;inset:-5%;background:url('images/ГГ.JPG') center/cover;transform:scale(1.08);filter:saturate(.65) contrast(1.08) brightness(.7)}.heroShade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,4,4,.18),rgba(2,4,4,.78)),linear-gradient(0deg,#050707 0,transparent 48%)}.heroText{position:absolute;z-index:3;left:7vw;bottom:9vh;max-width:900px}.hero h1{font-size:clamp(62px,11vw,165px);font-weight:400;line-height:.76;letter-spacing:-.055em;margin:.14em 0 .22em}.hero p{font-size:clamp(17px,1.8vw,25px);line-height:1.55;max-width:650px;color:#b8bbb4}.scrollCue{margin-top:28px;cursor:pointer;display:inline-flex;align-items:center;font:9px Arial;letter-spacing:.3em;text-transform:uppercase;color:#8b9694}.scrollCue{border:0;background:none;padding:0;color:#8b9694}.scrollCue i{display:inline-block;width:42px;height:1px;background:#8b9694;vertical-align:middle;margin-right:12px;animation:pulse 1.8s infinite}@keyframes pulse{50%{width:70px;opacity:.4}}
+.corridor{height:300vh;position:relative;background:#060808}.sticky{height:100svh;position:sticky;top:0;overflow:hidden}.frame{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.05);transition:opacity .55s,transform 1.4s}.frame:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,5,5,.65),rgba(3,5,5,.08),rgba(3,5,5,.52)),linear-gradient(0deg,rgba(3,5,5,.8),transparent 45%)}.frame.active{opacity:1;transform:scale(1)}.storyCaption{position:absolute;z-index:4;left:7vw;bottom:9vh;width:min(610px,84vw)}.storyCaption .year{font:10px Arial;letter-spacing:.3em;color:#b3bfbd}.storyCaption h2{font-size:clamp(38px,6vw,82px);font-weight:400;line-height:.96;margin:.15em 0}.storyCaption p{font-size:18px;line-height:1.65;color:#b6bab5}.sceneDots{position:absolute;right:28px;top:50%;z-index:5;display:flex;flex-direction:column;gap:10px}.sceneDots i{width:5px;height:5px;border:1px solid #a7b3b1;border-radius:50%}.sceneDots i.on{background:#a7b3b1;box-shadow:0 0 8px #a7b3b1}
+.duality{min-height:110svh;padding:10vw 6vw;background:#070909}.duality h2,.islandTitle,.symbols h2{font-size:clamp(46px,8vw,110px);font-weight:400;line-height:.9;margin:.2em 0 .6em}.split{height:78vh;min-height:600px;display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);overflow:hidden}.person{position:relative;overflow:hidden;cursor:pointer;transition:flex .6s,filter .6s}.person img{width:100%;height:100%;object-fit:cover;filter:saturate(.55) brightness(.68);transition:transform 1s,filter .7s}.person:hover img,.person.open img{transform:scale(1.035);filter:saturate(.72) brightness(.82)}.person:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,5,5,.96),transparent 62%)}.personText{position:absolute;z-index:3;left:34px;right:34px;bottom:30px}.personText h3{font-size:clamp(34px,4vw,58px);font-weight:400;margin:0}.personText p{color:#aeb4b0;max-width:500px;line-height:1.55}.detail{max-height:0;opacity:0;overflow:hidden;transition:.65s}.person.open .detail{max-height:150px;opacity:1}.bond{height:1px;background:linear-gradient(90deg,transparent,#869391,transparent);margin:50px auto 0;max-width:800px;position:relative}.bond:after{content:"СПАСТИ  ↔  УДЕРЖАТЬ";position:absolute;left:50%;top:-6px;transform:translateX(-50%);background:#070909;padding:0 18px;font:9px Arial;letter-spacing:.28em;color:#8d9896;white-space:nowrap}
+.island{min-height:120svh;padding:9vw 6vw;background:radial-gradient(circle at 50% 35%,#172020 0,#080b0b 34%,#040606 75%);position:relative;overflow:hidden}.islandIntro{text-align:center;max-width:900px;margin:0 auto 50px}.islandIntro p{color:#9ba5a2;font-size:18px;line-height:1.7}.map{width:min(1050px,94vw);height:min(650px,68vh);min-height:520px;margin:auto;position:relative;border:1px solid rgba(180,205,202,.15);border-radius:50%;background:radial-gradient(ellipse at 47% 48%,rgba(99,124,119,.18),rgba(17,25,24,.1) 42%,rgba(1,3,3,.9) 70%),repeating-radial-gradient(ellipse at center,transparent 0 55px,rgba(165,191,187,.04) 56px 57px);box-shadow:0 0 120px #000 inset,0 0 60px rgba(114,143,139,.08);overflow:hidden}.map:after{content:"";position:absolute;inset:7%;border:1px dashed rgba(177,203,199,.26);border-radius:50%;animation:barrier 4s ease-in-out infinite}@keyframes barrier{50%{box-shadow:0 0 30px rgba(165,205,200,.14);border-color:rgba(196,222,218,.45)}}.forest{position:absolute;inset:12%;opacity:.32;background:repeating-conic-gradient(from 15deg at 50% 50%,transparent 0 8deg,rgba(105,133,126,.14) 9deg 10deg)}.mapPoint{position:absolute;z-index:4;transform:translate(-50%,-50%);background:#080b0b;border:1px solid #82918f;color:#d0d5cf;width:13px;height:13px;border-radius:50%;cursor:pointer;box-shadow:0 0 0 0 rgba(170,205,200,.25);animation:ping 2.4s infinite}.mapPoint:before{content:attr(data-label);position:absolute;left:18px;top:-4px;white-space:nowrap;font:9px Arial;letter-spacing:.18em;text-transform:uppercase;color:#99a5a2}.mapPoint:hover{background:#a9b7b5}.mapPoint:nth-of-type(2){animation-delay:.6s}.mapPoint:nth-of-type(3){animation-delay:1.2s}.mapPoint:nth-of-type(4){animation-delay:1.8s}@keyframes ping{60%{box-shadow:0 0 0 12px transparent}}.mapInfoImg{width:100%;height:150px;object-fit:cover;display:block;margin-bottom:16px;filter:saturate(.55) brightness(.72)}.mapInfo{position:absolute;z-index:8;left:50%;bottom:7%;transform:translateX(-50%) translateY(12px);width:min(560px,78%);padding:20px 24px;background:rgba(5,8,8,.88);border:1px solid var(--line);backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:.4s}.mapInfo.show{opacity:1;transform:translateX(-50%) translateY(0)}.mapInfo strong{font-size:24px;font-weight:400}.mapInfo p{font:13px/1.6 Arial;color:#9ba5a2}.barrierNote{text-align:center;margin-top:22px;font:9px Arial;letter-spacing:.24em;text-transform:uppercase;color:#73817f}.barrierNote span{animation:flicker 2.7s infinite}@keyframes flicker{45%,55%{opacity:.25}}
+.gallery{background:#050707;padding:10vw 0}.galleryHead{padding:0 7vw 45px}.galleryHead h2{font-size:clamp(42px,7vw,95px);font-weight:400;margin:.2em 0}.strip{display:flex;gap:18px;overflow-x:auto;padding:0 7vw 30px;scroll-snap-type:x mandatory;scrollbar-width:none}.strip::-webkit-scrollbar{display:none}.shot{flex:0 0 min(72vw,900px);height:min(68vh,650px);scroll-snap-align:center;position:relative;overflow:hidden;border:1px solid var(--line)}.shot img{width:100%;height:100%;object-fit:cover;filter:saturate(.62);transition:1s}.shot:hover img{transform:scale(1.025);filter:saturate(.8)}.shot span{position:absolute;left:22px;bottom:20px;background:rgba(4,6,6,.72);padding:10px 13px;font:9px Arial;letter-spacing:.2em;text-transform:uppercase;color:#b6c0be}.symbols{padding:10vw 7vw;background:#080a0a}.symbolGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}.symbol{min-height:260px;background:#080a0a;padding:28px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;transition:.45s}.symbol:hover{background:#0e1313}.symbol:before{content:attr(data-mark);position:absolute;top:15px;right:20px;font-size:90px;color:rgba(190,205,201,.045);font-style:italic}.symbol strong{font-size:27px;font-weight:400}.symbol p{font:12px/1.6 Arial;color:#899492}
+.truth{height:260vh;position:relative;background:#030404}.truth .sticky{display:grid;place-items:center}.truthBg{position:absolute;inset:0;background:url('images/Драко.JPG') center/cover;filter:brightness(.35) saturate(.45);opacity:.45;transform:scale(1.08)}.truthBox{position:relative;z-index:5;text-align:center;width:min(850px,86vw)}.truthBox h2{font-size:clamp(55px,10vw,145px);font-weight:400;line-height:.82;margin:0}.truthBox p{font-size:clamp(17px,2vw,23px);line-height:1.7;color:#adb4af;max-width:720px;margin:28px auto}.freedom{display:inline-block;margin-top:20px;border:1px solid #8d9b99;background:transparent;color:#d4d8d2;padding:17px 30px;font:10px Arial;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:.35s}.freedom:hover{background:#c5cfcc;color:#111}.truthReveal{display:none;opacity:0;filter:blur(8px);transform:translateY(18px);transition:1.2s}.truth.revealed .truthReveal{display:block;opacity:1;filter:none;transform:none}.truth.revealed .truthBg{animation:darken 3s forwards}@keyframes darken{to{filter:brightness(.12) saturate(.2);transform:scale(1)}}.final{min-height:100svh;display:grid;place-items:center;text-align:center;padding:8vw;background:#010202}.final blockquote{font-size:clamp(30px,5vw,72px);font-weight:400;font-style:italic;max-width:1000px;margin:0}.final small{display:block;margin-top:35px;font:9px Arial;letter-spacing:.28em;text-transform:uppercase;color:#697472}
+@media(max-width:800px){.corridor{height:220vh}.truth{height:100svh;min-height:720px}.truth .sticky{position:relative;height:100%;}.hero{min-height:100svh}.mapInfo{bottom:4%;width:86%;padding:14px}.mapInfoImg{height:120px}.split{grid-template-columns:1fr;height:auto}.person{height:62vh}.symbolGrid{grid-template-columns:1fr 1fr}.shot{flex-basis:86vw;height:55vh}.map{min-height:500px}.sceneDots{right:12px}.storyCaption{left:6vw}.heroText{left:6vw}.soundless{display:none}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* ===== 2003 interactive chapter ===== */
+.y2003{background:#050606;color:#d8d7cf;position:relative;overflow:hidden}
+.y2003 *{box-sizing:border-box}
+.y03-kicker{font:500 11px/1.2 system-ui,sans-serif;letter-spacing:.36em;text-transform:uppercase;color:#8d9898}
+.y03-title{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.04em}
+.y03-intro{min-height:86vh;display:grid;place-items:center;padding:10vh 7vw;position:relative;background:
+linear-gradient(180deg,rgba(3,4,4,.15),#050606 93%),url('images/house.JPG') center/cover no-repeat}
+.y03-intro:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.7),rgba(0,0,0,.15),rgba(0,0,0,.55));pointer-events:none}
+.y03-introInner{position:relative;z-index:1;width:min(1050px,100%);align-self:end;padding-bottom:8vh}
+.y03-intro h2{font-size:clamp(62px,13vw,150px);margin:8px 0 0}
+.y03-intro p{max-width:580px;font:400 clamp(17px,2vw,24px)/1.5 Georgia,serif;color:#b8b8b1}
+.y03-swipehint{display:inline-flex;gap:16px;align-items:center;margin-top:22px;font:500 10px/1 system-ui,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#a9b2b2}
+.y03-swipehint i{display:block;width:54px;height:1px;background:#a9b2b2;position:relative;animation:hintline 1.7s ease-in-out infinite}
+.y03-swipehint i:after{content:"›";position:absolute;right:-2px;top:-8px;font-size:18px}
+@keyframes hintline{50%{transform:translateX(10px);opacity:.45}}
+
+.y03-reel{height:100svh;position:relative;background:#050606}
+.y03-reelSticky{height:100svh;display:flex;align-items:center;overflow:hidden}
+.y03-track{display:flex;gap:4vw;padding:0 8vw;will-change:transform;transition:transform .5s cubic-bezier(.2,.8,.2,1);touch-action:pan-y;width:max-content}
+.y03-shot{width:min(78vw,880px);height:min(68vh,660px);position:relative;flex:none;overflow:hidden;border:1px solid #303535;background:#090a0a}
+.y03-shot img{width:100%;height:100%;object-fit:cover;filter:saturate(.72) brightness(.78);transform:scale(1.03);transition:transform 1.2s ease,filter .7s ease}
+.y03-shot.active img{transform:scale(1);filter:saturate(.82) brightness(.9)}
+.y03-shot:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.82))}
+.y03-caption{position:absolute;z-index:2;left:clamp(22px,5vw,62px);right:clamp(22px,5vw,62px);bottom:clamp(24px,7vh,70px)}
+.y03-caption .line{font:400 clamp(28px,4.8vw,63px)/1.03 Georgia,serif;margin:0;color:#e3e1d8}
+.y03-caption .answer{margin-top:12px;color:#aeb6b5;font:italic 400 clamp(20px,3vw,36px)/1.2 Georgia,serif}
+.y03-dots{position:absolute;z-index:4;bottom:5vh;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.y03-dots button{width:30px;height:2px;padding:0;border:0;background:#4d5555}
+.y03-dots button.on{background:#d8d7cf}
+
+.y03-request{min-height:115vh;padding:12vh 7vw;display:grid;place-items:center;position:relative}
+.y03-requestGrid{width:min(1120px,100%);display:grid;grid-template-columns:1.15fr .85fr;gap:7vw;align-items:center}
+.y03-touch{position:relative;min-height:68vh;overflow:hidden;border:1px solid #303535;cursor:pointer}
+.y03-touch>img{width:100%;height:68vh;object-fit:cover;filter:saturate(.7) brightness(.75);transition:transform 1.1s ease,filter .6s}
+.y03-touch:hover>img,.y03-touch.open>img{transform:scale(1.025);filter:saturate(.75) brightness(.62)}
+.y03-touchLabel{position:absolute;inset:auto 24px 24px;z-index:3;font:500 10px/1.3 system-ui,sans-serif;letter-spacing:.28em;text-transform:uppercase}
+.y03-handLayer{position:absolute;inset:0;z-index:2;display:grid;place-items:center;background:rgba(3,4,4,.72);opacity:0;transition:.5s}
+.y03-touch.open .y03-handLayer{opacity:1}
+.y03-handLayer img{width:72%;max-height:55%;object-fit:cover;border:1px solid #596060}
+.y03-words{position:absolute;inset:0;display:grid;place-content:center;gap:9px;text-align:center;z-index:3;pointer-events:none}
+.y03-words span{font:400 clamp(28px,4vw,52px)/1 Georgia,serif;opacity:0;transform:translateY(8px);transition:.5s}
+.y03-touch.open .y03-words span:nth-child(1){opacity:.55;transform:none;transition-delay:.2s}
+.y03-touch.open .y03-words span:nth-child(2){opacity:.72;transform:none;transition-delay:.55s}
+.y03-touch.open .y03-words span:nth-child(3){opacity:1;transform:none;transition-delay:.9s}
+.y03-requestCopy h3{font:400 clamp(42px,7vw,86px)/.95 Georgia,serif;margin:12px 0 35px}
+.y03-count{display:grid;gap:13px;margin:0 0 34px;color:#8f9998;font:400 clamp(16px,2vw,23px)/1.4 Georgia,serif}
+.y03-count b{font:500 10px/1 system-ui,sans-serif;letter-spacing:.3em;color:#d8d7cf}
+.y03-dialogue{border-left:1px solid #596060;padding-left:22px;font:400 clamp(19px,2.3vw,30px)/1.5 Georgia,serif}
+.y03-no{display:inline-block;margin-top:18px;font-size:clamp(34px,5vw,62px);transition:.3s}
+.y03-request.rejected .y03-no{transform:translateX(5px);color:#f0eee4;text-shadow:8px 0 20px rgba(190,210,210,.2)}
+
+.y03-duel{min-height:105vh;display:grid;grid-template-columns:1fr 1fr;position:relative;background:#030404}
+.y03-side{min-height:105vh;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:9vh 6vw}
+.y03-side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.15) saturate(.55) brightness(.47);transition:transform 5s ease}
+.y03-side:hover img{transform:scale(1.035)}
+.y03-side:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.85))}
+.y03-quote{position:relative;z-index:2;font:400 clamp(29px,4.3vw,64px)/1.04 Georgia,serif;max-width:640px}
+.y03-quote small{display:block;margin-top:22px;font:400 clamp(15px,1.7vw,22px)/1.45 Georgia,serif;color:#aab0af}
+.y03-ghost{position:absolute;z-index:3;left:50%;bottom:3vh;transform:translateX(-50%);white-space:nowrap;font:500 9px/1 system-ui,sans-serif;letter-spacing:.25em;text-transform:uppercase;color:#9ba4a455;pointer-events:none}
+
+.y03-glitch{min-height:150vh;position:relative;background:#020303}
+.y03-glitchSticky{height:100svh;position:sticky;top:0;overflow:hidden;display:grid;place-items:center}
+.y03-glitchRoom,.y03-glitchBlur,.y03-glitchButterfly{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.y03-glitchRoom{filter:brightness(.38) saturate(.55);transform:scale(1.03)}
+.y03-glitchBlur{opacity:0;mix-blend-mode:screen;filter:grayscale(1) contrast(1.1);transition:opacity .5s}
+.y03-glitchButterfly{width:min(58vw,620px);height:auto;inset:auto;opacity:0;filter:grayscale(1) contrast(1.15);transition:opacity .5s,transform 1s;transform:scale(.92)}
+.y03-glitchText{position:relative;z-index:5;width:min(900px,86vw);text-align:center}
+.y03-glitchText p{font:400 clamp(28px,5vw,68px)/1.05 Georgia,serif;margin:18px 0;opacity:.12;transition:.5s}
+.y03-glitchText p.on{opacity:1}
+.y03-glitchText .ash{font-size:clamp(14px,2vw,22px);letter-spacing:.16em;color:#8e9998}
+.y03-glitch.shift .y03-glitchBlur{opacity:.14;animation:microshift .16s steps(2,end) 4}
+.y03-glitch.shift .y03-glitchButterfly{opacity:.42;transform:scale(1)}
+@keyframes microshift{50%{transform:translate(3px,-1px)}}
+
+.truth{height:100svh!important;min-height:100svh;position:relative!important;background:#030404;overflow:hidden}
+.truth .sticky{height:100svh!important;position:relative!important;top:auto!important;display:grid;place-items:center}
+.truthBg{opacity:.15!important;transition:opacity 1.1s,transform 2s;transform:scale(1.06)}
+.truth.revealed .truthBg{opacity:.32!important;transform:scale(1)}
+.truthBox{z-index:3;width:min(760px,86vw);text-align:center}
+.truthReveal{display:block!important;max-height:0;opacity:0;overflow:hidden;transform:translateY(20px);transition:max-height 1.2s ease,opacity .8s .25s,transform .8s .25s}
+.truthReveal{
+  display:block!important;
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transform:translateY(20px);
+
+  transition:
+    max-height 1.2s ease,
+    opacity .8s .25s,
+    transform .8s .25s;
+}
+
+.truth.revealed .truthReveal{
+  max-height:1000px;
+  opacity:1;
+  transform:none;
+}
+.freedom{cursor:pointer}
+.y03-mapReveal{margin:22px auto 0;width:min(560px,75vw);height:0;opacity:0;overflow:hidden;transition:height 1s ease,opacity .8s}
+.truth.revealed .y03-mapReveal{height:min(30vh,220px);opacity:1}
+.y03-mapReveal img{width:100%;height:100%;object-fit:cover;filter:grayscale(.45) brightness(.65)}
+
+.y03-easter{border:0;background:none;color:inherit;font:inherit;text-decoration:underline;text-decoration-color:#667070;text-underline-offset:5px;cursor:pointer}
+.y03-pop{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);display:grid;place-items:center;opacity:0;pointer-events:none;transition:.35s}
+.y03-pop.open{opacity:1;pointer-events:auto}
+.y03-pop img{max-width:min(82vw,650px);max-height:72vh;object-fit:contain;border:1px solid #5a6262}
+.y03-pop span{position:absolute;top:25px;right:28px;font:500 10px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+
+@media(max-width:720px){
+ .y03-intro{min-height:76svh;background-position:62% center}
+ .y03-introInner{padding-bottom:4vh}
+ .y03-shot{width:84vw;height:58svh}
+ .y03-requestGrid{grid-template-columns:1fr;gap:7vh}
+ .y03-touch,.y03-touch>img{min-height:56svh;height:56svh}
+ .y03-duel{grid-template-columns:1fr;min-height:auto}
+ .y03-side{min-height:78svh;padding:8vh 7vw}
+ .y03-ghost{position:fixed;bottom:10px;font-size:7px}
+}
+
+/* ===== 2003 v2: mobile-first / interaction fixes ===== */
+.mapInfo{position:absolute!important;z-index:30}
+.mapInfoClose{position:absolute;right:10px;top:8px;z-index:4;width:36px;height:36px;border:0;background:rgba(5,7,7,.82);color:#d7d3c8;font:300 28px/1 Arial;cursor:pointer;border-radius:50%}
+.mapInfoHint{display:block;margin-top:10px;font:8px/1.3 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#687270}
+.mapInfo:not(.show){pointer-events:none}
+.mapInfo.show{pointer-events:auto}
+.y03-shot video{width:100%;height:100%;object-fit:cover;filter:saturate(.72) brightness(.78);transform:scale(1.02)}
+.y03-captionTiny{font:9px/1 Arial,sans-serif!important;letter-spacing:.28em;text-transform:uppercase;color:#aeb6b5}
+.y03-literary{max-width:760px;margin:0;font:400 clamp(19px,2.45vw,31px)/1.42 Georgia,serif;color:#dedbd1}
+.y03-literary em{color:#f1eee2}
+#promise03{position:relative;text-decoration:none!important}
+#promise03:after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:#768180;transform-origin:left}
+#promise03:hover,#promise03:focus,#promise03.autoShake{animation:promiseShake .11s linear infinite;color:#e6e3d9}
+@keyframes promiseShake{
+  0%{transform:translate(0,0) rotate(0)}
+  25%{transform:translate(-1px,1px) rotate(-.35deg)}
+  50%{transform:translate(1px,0) rotate(.35deg)}
+  75%{transform:translate(-1px,-1px) rotate(-.2deg)}
+  100%{transform:translate(0,0) rotate(0)}
+}
+.y03-glitchFace{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:grayscale(.35) brightness(.42);transition:opacity .35s}
+.y03-glitch.shift .y03-glitchFace{animation:faceFlash 5.2s ease-in-out infinite}
+@keyframes faceFlash{0%,58%,72%,100%{opacity:0}63%,67%{opacity:.18}}
+
+@media(max-width:720px){
+  body:before{opacity:.055}
+  .island{padding-top:8vh!important}
+  .islandIntro{padding:0 20px!important}
+  .islandTitle{font-size:clamp(48px,15vw,72px)!important;line-height:.94!important}
+  .islandIntro p{font-size:16px!important;line-height:1.55!important}
+  .map{width:94vw!important;height:72vw!important;min-height:330px!important;margin:34px auto 0!important}
+  .mapPoint{transform:scale(.92)}
+  .mapInfo{position:fixed!important;left:12px!important;right:12px!important;top:auto!important;bottom:12px!important;width:auto!important;max-height:72svh!important;overflow:auto!important;transform:translateY(24px)!important}
+  .mapInfo.show{transform:translateY(0)!important}
+  .mapInfoImg{height:min(34svh,270px)!important;object-fit:cover}
+  .barrierNote{padding-bottom:7vh!important}
+
+  .y03-intro{min-height:72svh;padding:8vh 20px}
+  .y03-intro h2{font-size:clamp(56px,18vw,84px)}
+  .y03-intro p{font-size:17px;line-height:1.5}
+  .y03-reel{height:76svh}
+  .y03-reelSticky{height:76svh}
+  .y03-track{gap:14px;padding:0 8vw}
+  .y03-shot{width:84vw;height:59svh;border-color:#242a2a}
+  .y03-caption{left:20px;right:20px;bottom:25px}
+  .y03-caption .line{font-size:clamp(27px,8vw,42px)}
+  .y03-literary{font-size:18px;line-height:1.42}
+  .y03-dots{bottom:2.2vh}
+  .y03-dots button{width:22px}
+
+  .y03-request{padding:9vh 20px;min-height:auto}
+  .y03-requestGrid{gap:36px}
+  .y03-touch,.y03-touch>img{height:58svh;min-height:0}
+  .y03-requestCopy h3{font-size:clamp(44px,14vw,68px);margin-bottom:25px}
+  .y03-count{font-size:16px}
+  .y03-dialogue{font-size:20px}
+  .y03-no{font-size:38px}
+
+  .y03-duel{display:block}
+  .y03-side{min-height:72svh;padding:8vh 22px 7vh}
+  .y03-quote{font-size:clamp(31px,9vw,46px)}
+  .y03-quote small{font-size:17px}
+  .y03-ghost{position:absolute!important;left:18px;right:18px;bottom:16px;transform:none;white-space:normal;text-align:center;line-height:1.5}
+
+  .y03-glitch{min-height:125vh}
+  .y03-glitchText{width:88vw}
+  .y03-glitchText p{font-size:clamp(29px,9vw,48px)}
+  .y03-glitchText .ash{font-size:12px}
+  .truthBox h2{font-size:clamp(54px,18vw,86px)!important}
+  .truthBox>p{font-size:17px!important;line-height:1.5}
+}
+
+/* ===== Island redesign: not a radar, but a contained route ===== */
+.island{
+  min-height:auto!important;
+  padding:9vh 0 10vh!important;
+  overflow:hidden;
+}
+.islandIntro{
+  width:min(760px,88vw)!important;
+  margin:0 auto!important;
+  text-align:left!important;
+}
+.islandIntro p{
+  max-width:650px!important;
+  margin:0!important;
+}
+.map{
+  position:relative!important;
+  width:min(620px,92vw)!important;
+  height:min(860px,132vw)!important;
+  min-height:620px!important;
+  margin:54px auto 18px!important;
+  border:0!important;
+  border-radius:46% 54% 42% 58% / 9% 11% 89% 91%!important;
+  background:
+    linear-gradient(180deg,rgba(6,10,11,.08),rgba(8,13,13,.72)),
+    radial-gradient(ellipse at 50% 84%,rgba(94,109,103,.12),transparent 29%),
+    linear-gradient(180deg,#080c0d 0%,#0b1010 52%,#060909 100%)!important;
+  box-shadow:inset 0 0 90px rgba(0,0,0,.88),0 0 90px rgba(38,54,52,.08)!important;
+}
+.map:before{
+  content:"";
+  position:absolute;
+  inset:3.5% 6%;
+  border:1px dashed rgba(136,157,153,.32);
+  border-radius:45% 55% 44% 56% / 8% 10% 90% 92%;
+  pointer-events:none;
+}
+.map:after{
+  content:"";
+  position:absolute;
+  left:50%; top:14%; bottom:12%;
+  width:1px;
+  background:linear-gradient(180deg,transparent,rgba(145,158,153,.13) 16%,rgba(145,158,153,.22) 48%,rgba(145,158,153,.08) 82%,transparent);
+  box-shadow:-18px 0 42px rgba(114,135,128,.06),18px 0 42px rgba(114,135,128,.06);
+  pointer-events:none;
+}
+.mapGrid{display:none!important}
+.mapPoint{
+  position:absolute!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  transform:translateX(-50%)!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  z-index:5!important;
+  white-space:nowrap!important;
+}
+.mapPoint:nth-of-type(1){top:75%!important} /* дом */
+.mapPoint:nth-of-type(2){top:48%!important} /* лес */
+.mapPoint:nth-of-type(3){top:19%!important} /* обрыв */
+.mapPoint:nth-of-type(4){
+  top:6%!important;
+  left:82%!important;
+  transform:none!important;
+  opacity:.78;
+} /* barrier: on the perimeter */
+.mapPoint:nth-of-type(1):after,
+.mapPoint:nth-of-type(2):after,
+.mapPoint:nth-of-type(3):after{
+  content:"";
+  position:absolute;
+  left:8px; top:28px;
+  width:1px; height:110px;
+  background:linear-gradient(rgba(130,151,145,.22),transparent);
+  pointer-events:none;
+}
+.mapPoint:nth-of-type(3):after{display:none}
+.mapPoint span{
+  font-size:10px!important;
+  letter-spacing:.17em!important;
+}
+.mapPoint i{
+  box-shadow:0 0 0 7px rgba(107,132,125,.035),0 0 24px rgba(113,145,135,.12)!important;
+}
+.barrierNote{
+  text-align:center!important;
+  margin-top:20px!important;
+  letter-spacing:.28em!important;
+  opacity:.65;
+}
+
+/* tiny geography labels: visual, not another content block */
+.map .islandSeaLabel{
+  position:absolute;left:50%;bottom:5.5%;transform:translateX(-50%);
+  font:8px/1 Arial,sans-serif;letter-spacing:.34em;text-transform:uppercase;color:#46514f;
+}
+.map .islandEdgeLabel{
+  position:absolute;left:10%;top:9%;
+  font:8px/1 Arial,sans-serif;letter-spacing:.25em;text-transform:uppercase;color:#53605d;
+  transform:rotate(-8deg);
+}
+
+/* ===== Door: separate cinematic beat ===== */
+.y03-doorBeat{
+  position:relative;
+  width:100%;
+  height:100svh;
+  min-height:620px;
+  background:#030505;
+  overflow:hidden;
+}
+.y03-doorBeat video{
+  width:100%;height:100%;object-fit:cover;
+  filter:saturate(.68) brightness(.68);
+}
+.y03-doorBeat:after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.16),transparent 50%,rgba(0,0,0,.55));
+  pointer-events:none;
+}
+.y03-doorWhisper{
+  position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);
+  z-index:2;
+  font:8px/1 Arial,sans-serif;letter-spacing:.34em;text-transform:uppercase;
+  color:rgba(220,222,215,.58);
+}
+
+/* ===== Promise: autonomous, irregular tremor; no cursor needed ===== */
+#promise03{
+  display:inline-block!important;
+  animation:promiseNervous 4.7s infinite!important;
+  will-change:transform;
+}
+#promise03:hover,#promise03:focus{animation:promiseNervous 4.7s infinite!important}
+@keyframes promiseNervous{
+  0%,15%,24%,49%,58%,79%,100%{transform:translate(0,0) rotate(0)}
+  16%{transform:translate(-1px,0) rotate(-.18deg)}
+  17%{transform:translate(1px,1px) rotate(.18deg)}
+  18%{transform:translate(-1px,-1px) rotate(-.12deg)}
+  19%{transform:translate(1px,0) rotate(.12deg)}
+  20%{transform:translate(0,0)}
+  50%{transform:translate(1px,0) rotate(.15deg)}
+  51%{transform:translate(-1px,1px) rotate(-.15deg)}
+  52%{transform:translate(1px,-1px) rotate(.1deg)}
+  53%{transform:translate(-1px,0)}
+  54%{transform:translate(0,0)}
+  80%{transform:translate(-1px,-1px) rotate(-.15deg)}
+  81%{transform:translate(1px,0) rotate(.18deg)}
+  82%{transform:translate(-1px,1px) rotate(-.1deg)}
+  83%{transform:translate(1px,-1px)}
+  84%{transform:translate(-1px,0)}
+  85%{transform:translate(0,0)}
+}
+
+@media(max-width:720px){
+  .island{padding-top:7vh!important}
+  .islandIntro{width:86vw!important;text-align:left!important}
+  .islandIntro p{font-size:16px!important}
+  .map{
+    width:90vw!important;
+    height:128vw!important;
+    min-height:540px!important;
+    max-height:720px!important;
+    margin-top:34px!important;
+  }
+  .mapPoint:nth-of-type(4){left:70%!important;top:6%!important}
+  .mapPoint:nth-of-type(1):after,
+  .mapPoint:nth-of-type(2):after{height:82px}
+  .barrierNote{font-size:8px!important;padding-bottom:0!important}
+  .y03-doorBeat{height:82svh;min-height:560px}
+  .y03-doorWhisper{bottom:5vh}
+}
+
+/* ===== v5: map modal repair + 2003 cinematic fragments ===== */
+.mapInfo.mapInfoPortal{position:fixed!important;inset:0!important;width:100vw!important;height:100svh!important;max-height:none!important;background:rgba(2,4,4,.78)!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex!important;align-items:center!important;justify-content:center!important;padding:24px!important;opacity:0!important;visibility:hidden!important;transform:none!important;transition:opacity .28s ease,visibility .28s ease!important;z-index:9999!important;overflow:auto!important}
+.mapInfo.mapInfoPortal.show{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+.mapInfo.mapInfoPortal .mapInfoCard{position:relative;width:min(680px,92vw);max-height:min(82svh,760px);overflow:auto;background:#060909;border:1px solid rgba(190,205,200,.18);box-shadow:0 30px 90px rgba(0,0,0,.65);padding:18px 18px 22px}
+.mapInfo.mapInfoPortal .mapInfoImg{display:block;width:100%;height:min(42svh,360px)!important;object-fit:cover;margin:0 0 18px}
+.mapInfo.mapInfoPortal strong{display:block;font-size:clamp(25px,5vw,38px);font-weight:400;margin:0 0 10px}
+.mapInfo.mapInfoPortal p{font:16px/1.55 Arial,sans-serif;color:#aeb5b2;margin:0;max-width:56ch}
+.mapInfo.mapInfoPortal .mapInfoClose{right:12px!important;top:12px!important;background:rgba(3,5,5,.88)!important}
+.mapInfo.mapInfoPortal .mapInfoHint{text-align:center;margin-top:16px}
+.y03-filmFragments{padding:8vh 0 10vh;background:#050606;overflow:hidden}
+.y03-filmFragmentsHead{width:min(900px,88vw);margin:0 auto 34px}
+.y03-filmFragmentsHead h3{font-size:clamp(36px,7vw,72px);font-weight:400;line-height:.95;margin:10px 0 0}
+.y03-filmStrip{display:grid;grid-template-columns:1.1fr .9fr .9fr;grid-template-rows:auto 310px;gap:10px;width:min(1120px,92vw);margin:auto}
+.y03-filmShot{position:relative;overflow:hidden;background:#090b0b}
+.y03-filmShot img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82) saturate(.78);transition:transform .7s ease,filter .7s ease}
+.y03-filmShot:hover img{transform:scale(1.025);filter:brightness(.94) saturate(.9)}
+.y03-filmShot:nth-child(1){grid-column:1/4;min-height:0;aspect-ratio:16/9}.y03-filmShot:nth-child(1) img{object-fit:contain;background:#050606}.y03-filmShot:nth-child(2),.y03-filmShot:nth-child(3),.y03-filmShot:nth-child(4){height:310px}
+.y03-filmShot:after{content:attr(data-no);position:absolute;left:12px;bottom:10px;font:8px Arial,sans-serif;letter-spacing:.25em;color:rgba(230,230,220,.45)}
+@media(max-width:700px){
+ .mapInfo.mapInfoPortal{padding:12px!important;align-items:flex-end!important}
+ .mapInfo.mapInfoPortal .mapInfoCard{width:100%;max-height:76svh;padding:12px 12px 18px;border-radius:16px 16px 0 0}
+ .mapInfo.mapInfoPortal .mapInfoImg{height:min(32svh,250px)!important;border-radius:8px}
+ .mapInfo.mapInfoPortal p{font-size:14px}
+ .y03-filmFragments{padding:7vh 0 9vh}
+ .y03-filmFragmentsHead{margin-bottom:24px}
+ .y03-filmFragmentsHead h3{font-size:clamp(38px,12vw,58px)}
+ .y03-filmStrip{display:flex;width:100%;overflow-x:auto;gap:8px;padding:0 7vw 12px;scroll-snap-type:x mandatory;scrollbar-width:none}
+ .y03-filmStrip::-webkit-scrollbar{display:none}
+ .y03-filmShot,.y03-filmShot:nth-child(n){flex:0 0 78vw;height:52svh;max-height:520px;min-height:390px;scroll-snap-align:center}.y03-filmShot:nth-child(1){height:auto;min-height:0;aspect-ratio:16/9}.y03-filmShot:nth-child(1) img{object-fit:contain}
+ .y03-filmShot:nth-child(2),.y03-filmShot:nth-child(3),.y03-filmShot:nth-child(4){flex-basis:68vw}
+}
+
+</style>
+
+<style id="mobile-fixes-v4">
+/* corridor video is a real story frame */
+.corridor{height:375vh}
+.frameVideo{background:#030505}
+.frameVideo video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.68) brightness(.72)}
+.frameVideo:after{z-index:1}
+
+/* second cinematic beat, directly after the island map */
+.y03-afterMap{position:relative;width:100%;height:min(82svh,820px);min-height:520px;background:#030505;overflow:hidden}
+.y03-afterMap video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.7) brightness(.72)}
+.y03-afterMapShade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(2,4,4,.16),transparent 45%,rgba(2,4,4,.48))}
+
+/* map cards must stay inside the island on every screen */
+.mapInfo{box-sizing:border-box;max-height:72%;overflow:auto;overscroll-behavior:contain}
+.mapInfoClose{position:absolute!important;right:10px!important;top:8px!important;z-index:12!important}
+
+@media(max-width:720px){
+  .corridor{height:375svh}
+  .storyCaption{left:20px!important;right:20px!important;bottom:7svh!important;width:auto!important}
+  .storyCaption p{font-size:15px!important;line-height:1.5!important}
+  .sceneDots{right:12px!important}
+  .frameVideo video{object-position:center center}
+
+  .map{width:92vw!important;height:122vw!important;min-height:500px!important;max-height:650px!important;overflow:hidden!important}
+  .mapInfo{
+    position:absolute!important;
+    left:5%!important;right:5%!important;bottom:4%!important;
+    width:90%!important;max-width:none!important;
+    max-height:46%!important;
+    transform:translateY(10px)!important;
+    padding:12px 14px 14px!important;
+    overflow:auto!important;
+    border-radius:0!important;
+  }
+  .mapInfo.show{transform:translateY(0)!important}
+  .mapInfoImg{height:105px!important;margin-bottom:9px!important;object-fit:cover!important}
+  .mapInfo strong{display:block!important;font-size:19px!important;line-height:1.1!important;padding-right:28px!important}
+  .mapInfo p{font-size:11px!important;line-height:1.42!important;margin:7px 0 0!important}
+  .mapInfoClose{font-size:22px!important;line-height:1!important}
+  .y03-afterMap{height:72svh;min-height:480px}
+  .y03-afterMap video{object-position:center center}
+
+  /* visual dictionary now acts as the breath before the final layer */
+  .symbols{padding:16vh 20px 12vh!important}
+  .symbolGrid{grid-template-columns:1fr 1fr!important}
+  .symbol{min-height:210px!important;padding:20px!important}
+  .symbol strong{font-size:22px!important}
+
+  .truth.revealed .truthReveal{
+    max-height:1200px;
+  }
+
+  .truthBox{
+    width:88vw;
+  }
+
+  .truthBox p{
+    font-size:16px;
+    line-height:1.55;
+  }
+}
+@media(max-width:430px){
+  .map{height:132vw!important;min-height:510px!important}
+  .mapInfo{max-height:44%!important}
+  .mapInfoImg{height:92px!important}
+  .symbolGrid{grid-template-columns:1fr!important}
+  .symbol{min-height:170px!important}
+}
+
+.finalQuote .finalWord {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.finalQuote .finalLetter {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(8px);
+
+  transform:
+    translate(var(--x), var(--y))
+    rotate(var(--r));
+
+  transition:
+    transform 1.8s cubic-bezier(.16,.8,.2,1),
+    opacity .9s ease,
+    filter 1.2s ease;
+
+  transition-delay: var(--delay);
+}
+
+.finalQuote.assemble .finalLetter {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate(0, 0) rotate(0);
+}
+
+.finalQuote.assemble span {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate(0, 0) rotate(0);
+}
+
+.readLink {
+  display: inline-block;
+  margin-top: 28px;
+
+  color: #d7d3c8;
+  text-decoration: none;
+
+  font: 10px Arial, sans-serif;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+
+  opacity: .68;
+  transition:
+    opacity .3s ease,
+    transform .3s ease,
+    letter-spacing .3s ease;
+}
+
+.readLink:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+  letter-spacing: .34em;
+}
+
+</style>
+
+</head>
+<body>
+<div class="progress">
+</div>
+<div class="soundless">интерактивная история · листайте
+</div>
+
+<header class="hero" id="home">
+<div class="heroBg">
+</div>
+<div class="heroShade">
+</div>
+<div class="heroText">
+<div class="eyebrow">Dramione · dark AU · 1996 / 2003
+</div>
+<h1>Образ<br>свободы
+</h1>
+<p>Он обещал её спасти. Спустя годы спасение стало клеткой, а свобода — словом, значение которого страшно узнать до конца.
+</p>
+<button class="scrollCue" id="enterMemory" type="button"><i></i>нажмите или прокрутите вниз
+</button>
+</div>
+</header>
+
+<section class="corridor" id="memory">
+<div class="sticky">
+<div class="frame active" style="background-image:url('images/Гидет.JPG')">
+</div>
+<div class="frame frameVideo">
+<video src="images/Аходьба.mov"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto">
+</video>
+</div>
+<div class="frame" style="background-image:url('images/идет.JPG')">
+</div>
+<div class="frame" style="background-image:url('images/Увидела.JPG')">
+</div>
+<div class="frame" style="background-image:url('images/плакиплаки.JPG')">
+</div>
+<div class="storyCaption">
+<div class="year">1996 · Хогвартс
+</div>
+<h2 id="sceneTitle">Она услышала плач
+</h2>
+<p id="sceneText">Пустой коридор, зимняя пурга за окнами и дверь, за которой привычный враг впервые оказывается просто испуганным мальчишкой.
+</p>
+</div>
+<div class="sceneDots"><i class="on"></i><i></i><i></i><i></i><i></i>
+</div>
+</div>
+</section>
+
+<section class="duality">
+<div class="eyebrow">два взгляда · нажмите на героя
+</div>
+<h2>Любое спасение<br>имеет последствие
+</h2>
+<div class="split">
+<article class="person" tabindex="0"><img src="images/Гермиона.JPG">
+<div class="personText">
+<h3>Гермиона
+</h3>
+<p>Память, сопротивление, скорбь. Она продолжает искать границу клетки даже тогда, когда почти привыкла к ней.
+</p>
+<div class="detail">
+<p><b>Её мир:</b> книги · могилы друзей · холод · лес · обрыв.<br><b>Её вопрос:</b> может ли безопасность стоить права уйти?
+</p>
+</div>
+</div>
+</article>
+<article class="person" tabindex="0"><img src="images/Драко.JPG">
+<div class="personText">
+<h3>Драко
+</h3>
+<p>Страх, обещание и зависимость. Он всё ещё считает, что спасает её — даже когда спасение становится владением.
+</p>
+<div class="detail">
+<p><b>Его мир:</b> шрамы · хвоя · мыло · обещание · удерживание.<br><b>Его вопрос:</b> где заканчивается защита и начинается клетка?
+</p>
+</div>
+</div>
+</article>
+</div>
+<div class="bond">
+</div>
+</section>
+
+<section class="gallery">
+<div class="galleryHead">
+<div class="eyebrow">визуальная память · проведите в сторону
+</div>
+<h2>Немного <br> из 1996
+</h2>
+</div>
+<div class="strip">
+<figure class="shot"><img src="images/ГГ.JPG">
+</figure>
+<figure class="shot"><img src="images/Гидет.JPG">
+</figure>
+<figure class="shot"><img src="images/идет.JPG">
+</figure>
+<figure class="shot"><img src="images/Увидела.JPG">
+</figure>
+<figure class="shot"><img src="images/плакиплаки.JPG">
+</figure>
+<figure class="shot"><img src="images/Гермиона.JPG">
+</figure>
+<figure class="shot"><img src="images/hand2.PNG">
+</figure>
+<figure class="shot"><img src="images/Драко.JPG">
+</figure>
+</div>
+</section>
+
+<section class="y2003" id="year2003">
+  
+<div class="y03-intro">
+    
+  <div class="y03-introInner">
+      
+  <div class="y03-kicker">2003 · остров
+</div>
+      
+<h2 class="y03-title">Почти дом
+</h2>
+      
+<p>Камин всегда зажжён, но никогда не греет. Всё построено так, как желает Драко ради её блага. Но что есть это «благо»?
+</p>
+      
+<div class="y03-swipehint"><span>Продолжайте</span><i></i>
+</div>
+    
+</div>
+  
+</div>
+
+  
+<section class="island" id="island">
+<div class="islandIntro">
+<div class="eyebrow">2003 · неизвестный остров
+</div>
+<div class="islandTitle">Мир размером<br>с клетку.
+</div>
+<p>Запрятанная в глубине леса — она даже не понимала до конца, в какой части страны находится, — ей дозволено лишь прогуливаться по опушке леса, доходя до высокого обрыва.
+</p>
+</div>
+<div class="map">
+<div class="forest">
+</div>
+<button class="mapPoint" style="left:48%;top:52%" data-label="Дом" data-title="Дом" data-img="images/домик.JPG" data-text="Драко называет его «нашим». Для Гермионы пять лет в нём смешались в один бесконечный день.">
+</button>
+<button class="mapPoint" style="left:30%;top:34%" data-label="Лес" data-title="Лес" data-img="images/лес.JPG" data-text="Ей разрешено гулять по опушке. Открытое пространство, которое всё равно заканчивается невидимой стеной.">
+</button>
+<button class="mapPoint" style="left:72%;top:30%" data-label="Обрыв" data-title="Обрыв" data-img="images/cliff.JPG" data-text="Самая дальняя доступная точка. Место, где остров почти позволяет поверить, что можно наконец выпорхнуть.">
+</button>
+<button class="mapPoint" style="left:80%;top:68%" data-label="Барьер" data-title="Барьер" data-img="images/барьер.JPG" data-text="Без палочки его не преодолеть. Граница безопасности и одновременно граница чужого контроля.">
+</button>
+<div class="mapInfo" role="dialog" aria-modal="true">
+<button class="mapInfoClose" aria-label="Закрыть">×
+</button><img class="mapInfoImg" alt=""><strong></strong>
+<p>
+</p><span class="mapInfoHint">нажмите вне карточки, чтобы закрыть</span>
+</div>
+</div>
+<div class="barrierNote"><span>магия острова · истощается</span>
+</div>
+</section>
+
+<section class="y03-afterMap" aria-label="После карты">
+<video src="images/драко.mov"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto">
+</video>
+<div class="y03-afterMapShade">
+</div>
+</section>
+
+<div class="y03-reel" id="y03reel">
+    
+<div class="y03-reelSticky">
+      
+<div class="y03-track">
+        
+<article class="y03-shot active">
+          <img src="images/wtf.PNG" alt="">
+          
+<div class="y03-caption">
+<p class="line">— Не хочешь спросить, как прошёл мой день?
+</p>
+</div>
+        
+</article>
+        
+<article class="y03-shot">
+          <img src="images/нюд.PNG" alt="">
+          
+<div class="y03-caption">
+<p class="line">— Кроваво?
+</p>
+</div>
+        
+</article>
+        
+<article class="y03-shot y03-voldemort">
+          <img src="images/newspaper.JPG" alt="">
+          
+<div class="y03-caption">
+            
+<p class="y03-literary">К горлу подступил ком от упоминания <em>«победы»</em>. Ей нечего было праздновать. С ней оставалась глубокая скорбь, которая навсегда засела в груди и продолжала биться о внутренние органы.
+</p>
+          
+</div>
+        
+</article>
+      
+</div>
+      
+<div class="y03-dots">
+<button class="on">
+</button>
+<button>
+</button>
+<button>
+</button>
+</div>
+    
+</div>
+  
+</div>
+
+<section class="y03-filmFragments" aria-label="Фрагменты 2003 года">
+    
+<div class="y03-filmFragmentsHead">
+<div class="y03-kicker">2003 · почти дом
+</div>
+<h3>Близость тоже<br>может быть клеткой
+</h3>
+</div>
+    
+<div class="y03-filmStrip">
+      
+<figure class="y03-filmShot" data-no="01"><img src="images/oh.JPG" alt="">
+</figure>
+      
+<figure class="y03-filmShot" data-no="02"><img src="images/hot1.JPG" alt="">
+</figure>
+      
+<figure class="y03-filmShot" data-no="03"><img src="images/hand1.PNG" alt="">
+</figure>
+      
+<figure class="y03-filmShot" data-no="04"><img src="images/fuck1.PNG" alt="">
+</figure>
+    
+</div>
+  
+</section>
+
+  
+<div class="y03-request" id="request03">
+    
+<div class="y03-requestGrid">
+      
+<div class="y03-touch" id="touch03">
+        <img src="images/lap.JPG" alt="">
+        
+<div class="y03-handLayer"><img src="images/only_you.JPG" alt="">
+</div>
+        
+<div class="y03-words"><span>утешают</span><span>лечат</span><span>удерживают</span>
+</div>
+        
+<div class="y03-touchLabel">коснуться руки
+</div>
+      
+</div>
+      
+<div class="y03-requestCopy">
+        
+<div class="y03-kicker">единственная просьба
+</div>
+        
+<h3>«Погладь меня»
+</h3>
+        
+<div class="y03-count"><span><b>ОДИН.</b> Это единственный шанс.</span><span><b>ДВА.</b> Появилось чёткое основание для просьбы.</span><span><b>ТРИ.</b></span>
+</div>
+        
+<div class="y03-dialogue">— Позволь завтра посетить могилу Гарри и Рона.<br><span class="y03-no">— М-м-м… Нет.</span>
+</div>
+      
+</div>
+    
+</div>
+  
+</div>
+
+  
+<div class="y03-duel">
+    
+<div class="y03-side"><img src="images/мог.PNG" alt="">
+<div class="y03-quote">— У тебя остался я.<small>Но тебя только волнуют голые кости.</small>
+</div>
+</div>
+    
+<div class="y03-side"><img src="images/fff.JPG" alt="">
+<div class="y03-quote">— Да лучше бы я сдохла вместе с ними, чем быть запертой здесь.<small>«Эта горка земли — единственное, что у меня осталось».</small>
+</div>
+</div>
+    
+<div class="y03-ghost">Я вырвал тебя из лап смерти · Ты дышишь здесь только благодаря мне
+</div>
+  
+</div>
+
+  
+<div class="y03-glitch" id="glitch03">
+    
+<div class="y03-glitchSticky">
+      <img class="y03-glitchRoom" src="images/fireplace_room.JPG" alt="">
+      <img class="y03-glitchBlur" src="images/blur_figures.JPG" alt="">
+
+      <img class="y03-glitchButterfly" src="images/butterfly.JPG" alt="">
+      
+<div class="y03-glitchText">
+        
+<p class="ash">запах гари
+</p>
+        
+<p>Голос становится дальше.
+</p>
+        
+<p>Комната вокруг —<br><em>не та комната.</em>
+</p>
+        
+<p>— Я не сдержал 
+<button class="y03-easter" id="promise03">обещание
+</button>.<br>Не спас тебя.
+</p>
+      
+</div>
+    
+</div>
+  
+</div>
+
+</section>
+
+<div class="y03-pop" id="promisePop"><span>закрыть</span><img src="images/promise.JPG" alt="">
+</div>
+
+
+<section class="truth" id="truth">
+<div class="sticky">
+  
+<div class="truthBg" style="background-image:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.75)),url('images/cliff.JPG')">
+</div>
+  
+<div class="truthBox">
+    
+<div class="eyebrow">последний слой · spoiler mode
+</div>
+    
+<h2>СВОБОДА
+</h2>
+    
+<p>Всю историю она означает выход. Здесь можно наконец открыть дверь.
+</p>
+    
+<button class="freedom">выйти за границу
+</button>
+    
+<div class="truthReveal">
+      
+<div class="y03-mapReveal"><img src="images/обрыв.JPG" alt="">
+</div>
+      
+<p>Магия острова на исходе.
+</p>
+      
+<p>Этот остров всегда был <strong>олицетворением безмерной любви Драко.</strong> Но ей не хотелось сидеть вечно взаперти. 
+</p>
+      
+<div class="eyebrow">значение слова изменилось
+</div>
+      
+    
+</div>
+  
+</div>
+
+</div>
+</section>
+
+<section class="final">
+<div>
+<blockquote class="finalQuote">«Свобода теперь означала лишь беспросветную тьму»
+</blockquote><small>ОБРАЗ СВОБОДЫ · интерактивная визуальная история</small>
+<a
+  class="readLink"
+  href="https://ficbook.net/readfic/019badf5-4601-7d97-b547-75a96ea898f5"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Читать→
+</a>
+</div>
+</section>
+
+<script>
+const prog=document.querySelector('.progress'),heroBg=document.querySelector('.heroBg');addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;prog.style.width=(scrollY/max*100)+'%';heroBg.style.transform=`scale(1.08) translateY(${Math.min(scrollY*.06,40)}px)`},{passive:true});
+const corridor=document.querySelector('.corridor'),frames=[...document.querySelectorAll('.frame')],dots=[...document.querySelectorAll('.sceneDots i')],title=document.querySelector('#sceneTitle'),desc=document.querySelector('#sceneText');const scenes=[['Она услышала плач','Зимняя пурга за окном нарочно подыгрывала тому, кто плакал в заброшенном туалете, утаивая столь интересное событие.'],['Ещё несколько шагов','Она могла развернуться. Вместо этого пошла на звук дальше.'],['Она всё-таки вошла','Гермиона сделала ещё один шажок и выглянула из‑за дверного проёма. Блёклый свет луны бросал изогнутые тени от раковин и обрамлял скрючившуюся на полу фигуру.'],['Всхлипы прекратились','Она видела, как в его красных глазах одна эмоция сменялась другой. Сначала там был страх, затем гнев, а потом стыд.'],['«Всё будет хорошо, Драко...»','Лоб Драко в конце концов прижался к её руке.Обещание утешения сне потерять её превратит спасение в клетку.']];
+function corridorScroll(){const r=corridor.getBoundingClientRect(),p=Math.max(0,Math.min(1,-r.top/(r.height-innerHeight))),i=Math.min(3,Math.floor(p*5));frames.forEach((f,n)=>f.classList.toggle('active',n===i));dots.forEach((d,n)=>d.classList.toggle('on',n===i));title.textContent=scenes[i][0];desc.textContent=scenes[i][1]}addEventListener('scroll',corridorScroll,{passive:true});corridorScroll();
+document.querySelectorAll('.person').forEach(p=>{const toggle=()=>p.classList.toggle('open');p.addEventListener('click',toggle);p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')toggle()})});
+const info=document.querySelector('.mapInfo');
+// Move the location card outside the shaped map so no ancestor can clip it.
+if(info){
+  const card=document.createElement('div');
+  card.className='mapInfoCard';
+  while(info.firstChild) card.appendChild(info.firstChild);
+  info.appendChild(card);
+  info.classList.add('mapInfoPortal');
+  document.body.appendChild(info);
+}
+const closeMapInfo=()=>info&&info.classList.remove('show');
+document.querySelectorAll('.mapPoint').forEach(b=>b.addEventListener('click',e=>{
+ e.stopPropagation();
+ info.querySelector('.mapInfoImg').src=b.dataset.img;
+ info.querySelector('strong').textContent=b.dataset.title;
+ info.querySelector('p').textContent=b.dataset.text;
+ info.classList.add('show');
+}));
+document.querySelector('.mapInfoClose')?.addEventListener('click',e=>{e.stopPropagation();closeMapInfo()});
+info?.addEventListener('click',e=>{if(e.target===info)closeMapInfo(); else e.stopPropagation()});
+document.querySelector('.map')?.addEventListener('click',closeMapInfo);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMapInfo()});
+document.querySelector('#enterMemory').addEventListener('click',()=>document.querySelector('#memory').scrollIntoView({behavior:'smooth',block:'start'}));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.animate([{opacity:.12,transform:'translateY(24px)'},{opacity:1,transform:'none'}],{duration:850,easing:'cubic-bezier(.2,.7,.2,1)',fill:'both'})}),{threshold:.1});document.querySelectorAll('.islandIntro,.galleryHead,.symbols>*,.final>div').forEach(x=>io.observe(x));
+
+  const doorBeat=document.querySelector('#doorBeat03');
+  const doorVid=doorBeat?.querySelector('video');
+  if(doorBeat&&doorVid){
+    const doorObs=new IntersectionObserver(es=>es.forEach(e=>{
+      if(e.isIntersecting){
+        doorVid.currentTime=0;
+        doorVid.play().catch(()=>{});
+      }else{
+        doorVid.pause();
+      }
+    }),{threshold:.42});
+    doorObs.observe(doorBeat);
+  }
+
+</script>
+
+<script>
+(()=>{
+  const track=document.querySelector('.y03-track');
+  const shots=[...document.querySelectorAll('.y03-shot')];
+  const dots=[...document.querySelectorAll('.y03-dots button')];
+  let idx=0,startX=null;
+
+  function show(i){
+    idx=Math.max(0,Math.min(shots.length-1,i));
+    const shot=shots[idx];
+    const sticky=document.querySelector('.y03-reelSticky');
+    const x=shot.offsetLeft-(sticky.clientWidth-shot.clientWidth)/2;
+    track.style.transform=`translateX(${-x}px)`;
+    shots.forEach((s,j)=>{
+      s.classList.toggle('active',j===idx);
+      const v=s.querySelector('video');
+      if(v){ if(j===idx){v.currentTime=0;v.play().catch(()=>{});} else {v.pause();} }
+    });
+    dots.forEach((d,j)=>d.classList.toggle('on',j===idx));
+  }
+  dots.forEach((d,i)=>d.addEventListener('click',()=>show(i)));
+  track.addEventListener('pointerdown',e=>{startX=e.clientX;track.setPointerCapture?.(e.pointerId)});
+  track.addEventListener('pointerup',e=>{
+    if(startX===null)return;
+    const dx=e.clientX-startX;
+    if(Math.abs(dx)>35) show(idx+(dx<0?1:-1));
+    startX=null;
+  });
+  track.addEventListener('wheel',e=>{
+    if(Math.abs(e.deltaX)>Math.abs(e.deltaY) && Math.abs(e.deltaX)>15){
+      e.preventDefault(); show(idx+(e.deltaX>0?1:-1));
+    }
+  },{passive:false});
+  window.addEventListener('resize',()=>show(idx));
+  setTimeout(()=>show(0),100);
+
+  const touch=document.querySelector('#touch03');
+  const req=document.querySelector('#request03');
+  touch?.addEventListener('click',()=>{touch.classList.toggle('open');req.classList.add('rejected')});
+
+  const glitch=document.querySelector('#glitch03');
+  const glitchLines=[...document.querySelectorAll('.y03-glitchText p')];
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(!en.isIntersecting)return;
+      glitch?.classList.add('shift');
+      glitchLines.forEach((p,i)=>setTimeout(()=>p.classList.add('on'),i*520));
+    });
+  },{threshold:.45});
+  if(glitch)io.observe(glitch);
+
+  const pop=document.querySelector('#promisePop');
+  const promiseWord=document.querySelector('#promise03');
+  promiseWord?.addEventListener('click',()=>pop.classList.add('open'));
+  pop?.addEventListener('click',()=>pop.classList.remove('open'));
+
+  const freedom=document.querySelector('.freedom');
+  freedom?.addEventListener('click',()=>{
+    const truth=document.querySelector('.truth');
+    truth.classList.add('revealed');
+    freedom.textContent='граница открыта';
+    freedom.disabled=true;
+  });
+
+  const finalQuote = document.querySelector('.finalQuote');
+
+if (finalQuote) {
+  const text = finalQuote.textContent.trim();
+  finalQuote.textContent = '';
+
+  const directions = [
+    { x: '-70vw', y: '0vh', r: '-10deg' },
+    { x: '70vw', y: '0vh', r: '10deg' },
+    { x: '0vw', y: '-55vh', r: '-6deg' },
+    { x: '0vw', y: '55vh', r: '6deg' },
+    { x: '-55vw', y: '-45vh', r: '-8deg' },
+    { x: '55vw', y: '-45vh', r: '8deg' },
+    { x: '-55vw', y: '45vh', r: '-7deg' },
+    { x: '55vw', y: '45vh', r: '7deg' }
+  ];
+
+  let letterIndex = 0;
+
+text.split(' ').forEach((word, wordIndex, words) => {
+  const wordSpan = document.createElement('span');
+  wordSpan.className = 'finalWord';
+
+  [...word].forEach(char => {
+    const letter = document.createElement('span');
+    letter.className = 'finalLetter';
+    letter.textContent = char;
+
+    const d =
+      directions[Math.floor(Math.random() * directions.length)];
+
+    letter.style.setProperty('--x', d.x);
+    letter.style.setProperty('--y', d.y);
+    letter.style.setProperty('--r', d.r);
+
+    letter.style.setProperty(
+      '--delay',
+      `${Math.random() * 450 + letterIndex * 10}ms`
+    );
+
+    wordSpan.appendChild(letter);
+    letterIndex++;
+  });
+
+  finalQuote.appendChild(wordSpan);
+
+  if (wordIndex < words.length - 1) {
+    finalQuote.appendChild(document.createTextNode(' '));
+  }
+});
+
+  const finalObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        finalQuote.classList.add('assemble');
+        finalObserver.disconnect();
+      }
+    });
+  }, {
+    threshold: 0.35
+  });
+
+  finalObserver.observe(finalQuote);
+}
+})();
+
+
+</script>
+
+</body>
+</html>
